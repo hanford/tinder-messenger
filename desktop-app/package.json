@@ -1,0 +1,9 @@
+{
+  "name": "tinder-desktop",
+  "productName": "Tinder Desktop",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "tinder": "git://github.com/tinderjs/tinderjs"
+  }
+}

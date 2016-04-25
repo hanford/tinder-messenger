@@ -1,0 +1,57 @@
+{
+  "name": "tinder-desktop",
+  "version": "0.1.0",
+  "description": "A cross-platform desktop Tinder client",
+  "main": "build.js",
+  "scripts": {
+    "postinstall": "cd desktop-app && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanford/tinder-desktop.git"
+  },
+  "author": "Jack Hanford",
+  "contributors": [
+    {
+      "name": "Jack Hanford (@jackhanford)",
+      "url": "http://jackhanford.com"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tinderjs/tinder-desktop/issues"
+  },
+  "homepage": "https://github.com/tinderjs/tinder-desktop",
+  "devDependencies": {
+    "electron-packager": "~7.0.0",
+    "electron-prebuilt": "~0.37.5",
+    "gulp": "~3.9.1",
+    "gulp-appdmg": "~1.0.2",
+    "gulp-inno": "0.0.7",
+    "gulp-load-plugins": "~1.2.0",
+    "browserify": "~13.0.0",
+    "gulp-streamify": "~1.0.2",
+    "vinyl-source-stream": "~1.1.0",
+    "merge-stream": "~1.0.0",
+    "removeNPMAbsolutePaths": "~0.0.1",
+    "run-sequence": "~1.1.5",
+    "shelljs": "~0.6.0",
+    "angular": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "font-awesome": "~4.5.0",
+    "jquery": "~1.12.3",
+    "moment": "~2.12.0",
+    "mousetrap": "~1.4.6"
+  },
+  "optionalDependencies": {
+    "gulp-appdmg": "~1.0.2"
+  },
+  "dependencies": {
+    "angular-image-reveal": "~1.0.1",
+    "angular-sanitize": "~1.5.5",
+    "global": "~4.3.0",
+    "gulp-uglify": "~1.5.3",
+    "gulp-watch": "~4.3.5"
+  }
+}
