@@ -23,12 +23,18 @@
            ng-class="{true: 'selected'}[currentMatch === match.matchId]"
            class="match">
         <img ng-src="{{match.thumbnail || 'img/anonymous.png'}}" class="thumbnail"/>
-        <div class="info-container">
+        <div style="width:100%">
           <div class="name">{{match.name || 'Unknown'}}</div>
-          <div class="info" ng-show="showExtra && match.infoUpdateTime">
-            <i class="fa fa-location-arrow"></i> {{match.userDistance + ' mi'}} |
-            <i class="fa fa-bolt"></i> <span short-time-ago="{{match.userPingTime}}"></span> |
-            <i class="fa fa-comments" ng-class="lastMessageClass(match)"></i> <span short-time-ago="{{match.lastActive}}"></span>
+          <div class="info">
+            <div class="info-bit" ng-show="match.lastActive">
+              <i class="ion-ios-chatbubble-outline match-icon" ng-class="lastMessageClass(match)"></i> <span short-time-ago="{{match.lastActive}}"></span>
+            </div>
+            <div ng-show="match.userPingTime" class="info-bit">
+              <i class="ion-ios-eye-outline match-icon"></i><span short-time-ago="{{match.userPingTime}}"></span>
+            </div>
+            <div class="info-bit" ng-show="match.userDistance">
+              <i class="ion-ios-location-outline match-icon"></i> {{match.userDistance + 'mi'}}
+            </div>
           </div>
         </div>
       </div>
@@ -91,8 +97,8 @@
 
     <div>
       <!-- <div>Info</div> -->
-      <div>Last Online: {{user.ping_time | date: 'short'}}</div>
-      <div ng-show="user.bio">Bio: {{user.bio}}</div>
+      <!-- <div>Last Online: {{user.ping_time | date: 'short'}}</div> -->
+      <div ng-show="user.bio">{{user.bio}}</div>
     </div>
   </profile>
 </div>

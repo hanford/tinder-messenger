@@ -1,6 +1,7 @@
 /* General styles */
 * {
-  font-family: 'Merriweather', serif;
+  font-family: -apple-system, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5 {
@@ -36,6 +37,15 @@ html, body, body > div.ng-scope {
   overflow-x: hidden;
   overflow-y: auto;
   height: 100%;
+}
+
+.last-seen {
+  opacity: 0;
+  transition: all .2s ease-in;
+}
+
+.last-seen.in {
+  opacity: 1;
 }
 
 /* Specific */
@@ -123,7 +133,7 @@ html, body, body > div.ng-scope {
   background-color: #39589a;
   color: white;
   font-family: sans-serif;
-  padding: 12px 16px;
+  padding: 16px 20px;
   margin-top: 36px;
   border-radius: 3px;
   font-size: 20px;
@@ -132,7 +142,6 @@ html, body, body > div.ng-scope {
 }
 
 .fb-bttn:hover {
-  transform: scale(0.9);
   opacity: 0.9;
 }
 
@@ -177,20 +186,21 @@ html, body, body > div.ng-scope {
 
 /* Chat */
 #match-list {
-    width: 250px;
-    border-right: 1px solid #ddd;
-    flex: initial;
+  width: 250px;
+  border-right: 1px solid #ddd;
+  flex: initial;
+  background-color: #f5f5f4;
 }
 
 .match-header {
-    display: flex;
-    height: 53px;
-    align-items: center;
-    padding: 0 8px;
-    border-bottom: 1px solid #DDD;
-    justify-content: space-between;
-    background: white;
-    width: 234px;
+  display: flex;
+  height: 53px;
+  align-items: center;
+  padding: 0 8px;
+  border-bottom: 1px solid #DDD;
+  justify-content: space-between;
+  /*background: white;*/
+  width: 100%;
 }
 
 #match-list.more-info {
@@ -200,57 +210,74 @@ html, body, body > div.ng-scope {
     margin: 3px calc(75px - 1em);
 }
 .match {
-    display: block;
-    border-bottom: 1px solid #ddd;
-    padding: 8px;
-    height: 42px; /* Thumbnail size: 84px */
-    cursor: pointer;
-    color: inherit;
+  display: block;
+  border-bottom: 1px solid #ddd;
+  padding: 0px;
+  height: 60px;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
 }
 .match:hover {
-    background-color: rgba(245, 245, 245, 0.5);
+  background-color: rgba(245, 245, 245, 0.5);
 }
 .match.selected {
-    background-color: #F5F5F5;
-}
-.info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  background-color: #0069d9;
+  color: white;
+  border-color: #0069d9;
 }
 .match .thumbnail {
-    display: inline-block;
-    box-sizing: border-box;
-    float: left;
-    height: 42px;
-    width: 42px;
+  display: inline-block;
+  box-sizing: border-box;
+  float: left;
+  height: 42px;
+  border-radius: 50%;
+  margin-right: 8px;
+  width: 42px;
 }
 .match .name {
-    margin: 0;
-    text-align: center;
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-left: .5em;
+  margin: 0;
+  transition: all .2s linear;
+  font-size: 16px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 8px;
 }
 .match.more-info {
-    padding: 5px;
+  padding: 5px;
+  font-size: 14px;
 }
 
 .match.more-info .name {
-    line-height: 22px;
+  line-height: 22px;
 }
 
 .match .info {
-    margin: 0;
-    padding-top: 5px;
-    text-align: center;
-    font-weight: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 13px;
+  margin: 0;
+  padding-top: 5px;
+  text-align: center;
+  transition: all .2s linear;
+  font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.info-bit {
+  display: flex;
+  align-items: center;
+}
+
+.match-icon {
+  font-size: 20px;
+  display: flex;
+  margin-right: 4px;
 }
 
 /* from http://codepen.io/samuelkraft/pen/Farhl */
@@ -283,8 +310,11 @@ html, body, body > div.ng-scope {
 #conversation div.from-me,
 #conversation div.from-them {
     max-width: 51%;
+    font-size: 14px;
     word-wrap: break-word;
     margin-bottom: 10px;
+    margin: 1px 0;
+    padding: 6px 12px;
 }
 #conversation textarea {
     font-size: 1em;
@@ -361,8 +391,7 @@ html, body, body > div.ng-scope {
 }
 
 .from-me-date {
-    /*right: 0;*/
-    left: -100px;
+  left: -80px;
 }
 
 .from-me-date.bounceIn {
@@ -421,7 +450,7 @@ html, body, body > div.ng-scope {
     flex-direction: row;
     max-height: 53px;
     align-items: center;
-    padding: 0 8px;
+    padding: 0 16px;
     border-bottom: 1px solid #DDD;
 }
 
@@ -439,7 +468,7 @@ html, body, body > div.ng-scope {
 .unmatch-button {
     background-color: white;
     color: white;
-    padding: 8px 16px;
+    padding: 6px 10px;
     border-radius: 3px;
     background-color: #dd614c;
     border: 0px;
@@ -550,7 +579,7 @@ profile.profile-container {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 8px;
+  padding: 20px;
 }
 
 .photo-container > div {
@@ -578,4 +607,9 @@ profile.profile-container {
   box-shadow: 0 5px 5px rgba(85, 85, 85, 0.2);
   margin-bottom: 16px;
   border-radius: 50%;
+  transition: all .2s linear;
+}
+
+.profile-avatar:hover {
+  border-radius: 0;
 }
