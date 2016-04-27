@@ -1,8 +1,7 @@
 module.exports = require('angular')
   .module('messages', [
     require('angular-sanitize'),
-    require('./api'),
-    require('angular-image-reveal')
+    require('./api')
   ])
   .controller('MessagesController', MessagesController)
   .directive('shortTimeAgo', shortTimeAgo)

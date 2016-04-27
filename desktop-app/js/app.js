@@ -1,6 +1,7 @@
 require('angular')
   .module('tinder-messenger', [
     require('angular-route'),
+    require('angular-image-reveal'),
     require('./login'),
     require('./messages'),
     require('./controls')
