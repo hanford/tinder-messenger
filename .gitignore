@@ -4,6 +4,6 @@ build
 cache
 dist
 .DS_Store
-./desktop-app/img
-./desktop-app/dist
-./desktop-app/css
+desktop-app/img
+desktop-app/dist
+desktop-app/css
