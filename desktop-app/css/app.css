@@ -603,7 +603,8 @@ profile.profile-container {
 
 .profile-avatar {
   border-radius: 2px;
-  max-width: 180px;
+  max-width: 160px;
+  margin-top: 70px;
   box-shadow: 0 5px 5px rgba(85, 85, 85, 0.2);
   margin-bottom: 16px;
   border-radius: 50%;
