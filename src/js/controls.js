@@ -1,11 +1,12 @@
-var remote = require('remote');
+var remote = require('remote')
+var moment = require('moment')
 
-  module.exports = require('angular')
-    .module('controls', [
-      require('./api')
-    ])
-    .service('Controls', Controls)
-    .name
+module.exports = require('angular')
+  .module('controls', [
+    require('./api')
+  ])
+  .service('Controls', Controls)
+  .name
 
 function Controls (API, $interval, $q, orderByFilter, $timeout) {
   var controls = {

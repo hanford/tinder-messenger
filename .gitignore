@@ -1,10 +1,9 @@
-.idea/
-*.iml
 *.log
 node_modules
-bower_components
 build
 cache
-desktop-app/js/vendor
 dist
-*.DS_Store
+.DS_Store
+./desktop-app/img
+./desktop-app/dist
+./desktop-app/css

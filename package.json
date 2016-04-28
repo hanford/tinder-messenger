@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "A cross-platform desktop Tinder client",
   "main": "build.js",
-  "scripts": {
-    "postinstall": "cd desktop-app && npm install"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/hanford/tinder-desktop.git"
@@ -37,12 +35,9 @@
     "run-sequence": "~1.1.5",
     "shelljs": "~0.6.0",
     "angular": "~1.5.0",
-    "angular-cookies": "~1.5.0",
     "angular-route": "~1.5.0",
-    "font-awesome": "~4.5.0",
-    "jquery": "~1.12.3",
     "moment": "~2.12.0",
-    "mousetrap": "~1.4.6"
+    "tinder": "git://github.com/tinderjs/tinderjs"
   },
   "optionalDependencies": {
     "gulp-appdmg": "~1.0.2"

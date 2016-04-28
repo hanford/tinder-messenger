@@ -16,63 +16,58 @@ var $ = require('gulp-load-plugins')()
 var buildDir = './build';
 
 // File paths to various assets are defined here.
-var PATHS = {
-  javascript: [
-    'node_modules/angular/angular.js',
-    'node_modules/angular-cookies/angular-cookies.min.js',
-    'node_modules/angular-route/angular-route.min.js',
-    'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/moment/min/moment.min.js',
-    'node_modules/mousetrap/mousetrap.min.js'
-  ],
+var paths = {
   js: {
-    output: './desktop-app/dist'
+    output: './desktop-app/dist',
+    input: './src/js/app.js'
   },
-  stylesheets: [
-    'destkop-app/node_modules/font-awesome/css/font-awesome.min.css'
-  ],
-  fonts: [
-    'destkop-app/node_modules/font-awesome/fonts/*.{eot,svg,ttf,woff,woff2}'
-  ]
+  css: {
+    in: './src/css/**.css',
+    out: './desktop-app/css/'
+  },
+  imgs: {
+    in: './src/img/**',
+    out: './desktop-app/img/'
+  }
 }
 
-gulp.task('watch', ['run'], function () {
-  $.watch('./desktop-app/**/**.js', ['browserify'])
+gulp.task('move-images', function () {
+  return gulp.src(paths.imgs.in)
+    .pipe(gulp.dest(paths.imgs.out))
 })
 
-gulp.task('browserify', function () {
+gulp.task('build-js', function (done) {
   return browserify({
-    debug: true,
-    ignoreMissing: true
-  })
-    .add(['./desktop-app/js/app.js'])
+      debug: true,
+      ignoreMissing: true
+    })
+    .add(paths.js.input)
     .bundle()
     .pipe(source('app.min.js'))
-    .pipe(gulp.dest(PATHS.js.output))
+    //.pipe($.streamify($.uglify()))
+    .pipe(gulp.dest(paths.js.output))
+})
+
+gulp.task('watch', function () {
+  gulp.watch(paths.style.watch, ['build-css'])
+  gulp.watch(paths.js.all, ['build-js'])
 })
 
 // JavaScript assets handler
-gulp.task('compile:scripts', function() {
-  shelljs.rm('-rf', './desktop-app/js/vendor');
-  return gulp.src(PATHS.javascript)
-    .pipe(gulp.dest('desktop-app/js/vendor'));
-});
+//gulp.task('compile:scripts', function() {
+//  return gulp.src(paths.javascript)
+//    .pipe(gulp.dest('desktop-app/js/vendor'))
+//});
 
 // Stylesheet assets handler
-gulp.task('compile:stylesheets', function() {
-  return gulp.src(PATHS.stylesheets)
-    .pipe(gulp.dest('desktop-app/css'));
-});
-
-// Fonts assets handler
-gulp.task('compile:fonts', function() {
-  return gulp.src(PATHS.fonts)
-    .pipe(gulp.dest('desktop-app/fonts'));
-});
+gulp.task('compile:stylesheets', function () {
+  return gulp.src(paths.css.in)
+    .pipe(gulp.dest(paths.css.out))
+})
 
 // Assets handler
-gulp.task('compile:all', ['compile:scripts', 'compile:stylesheets',
-          'compile:fonts']);
+gulp.task('compile:all', ['compile:stylesheets',
+          'move-images']);
 
 // Remove build output directories
 gulp.task('clean', function() {
@@ -166,51 +161,51 @@ gulp.task('pack:darwin:x64', ['build:darwin:x64'], function(callback) {
 });
 
 // Build all platforms
-gulp.task('build:all', ['clean'], function(callback) {
+gulp.task('build:all', ['clean'], function (callback) {
   runSequence('build:darwin:x64', 'build:win32:all', 'build:linux:all',
               callback);
 });
 
 // Build all Windows archs
-gulp.task('build:win32:all', function(callback) {
+gulp.task('build:win32:all', function (callback) {
   runSequence('build:win32:ia32', 'build:win32:x64', callback);
 });
 
 // Build all Linux archs
-gulp.task('build:linux:all', function(callback) {
+gulp.task('build:linux:all', function (callback) {
   runSequence('build:linux:ia32', 'build:linux:x64', callback);
 });
 
 // Build and package all Linux archs
-gulp.task('pack:linux:all', ['build:linux:all'], function(callback) {
+gulp.task('pack:linux:all', ['build:linux:all'], function (callback) {
   runSequence('pack:linux:ia32:deb', 'pack:linux:ia32:rpm',
               'pack:linux:x64:deb', 'pack:linux:x64:rpm', callback);
 })
 
 // Build and package all Windows archs
-gulp.task('pack:win32:all', ['build:win32:all'], function(callback) {
+gulp.task('pack:win32:all', ['build:win32:all'], function (callback) {
   runSequence('pack:win32:ia32', 'pack:win32:x64', callback);
 })
 
 // Build and package all platforms
-gulp.task('pack:all', ['compile:all'], function(callback) {
+gulp.task('pack:all', ['compile:all'], function (callback) {
   runSequence('pack:darwin:x64', 'pack:win32:all',
               'pack:linux:all', callback);
 });
 
 // Run Tinder Desktop in debug mode
-gulp.task('run', ['compile:all', 'browserify'], function(callback) {
-  var child = proc.spawn(electron, ['--debug=5858', './desktop-app']);
+gulp.task('run', ['compile:all', 'build-js'], function (callback) {
+  var child = proc.spawn(electron, ['--debug=5858', './desktop-app'])
 
   child.stdout.on('data', function(data) {
-    console.log(`${data}`);
-  });
+    console.log(`${data}`)
+  })
 
   child.on('exit', function(exitCode) {
-    console.log('Exited with code: ' + exitCode);
-    return callback(exitCode === 1 ? new Error('Error running run task') : null);
-  });
-});
+    console.log('Exited with code: ' + exitCode)
+    return callback(exitCode === 1 ? new Error('Error running run task') : null)
+  })
+})
 
 // Default task is to run Tinder Desktop in debug mode
-gulp.task('default', ['run']);
+gulp.task('default', ['run'])

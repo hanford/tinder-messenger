@@ -1,9 +1,11 @@
+var moment = require('moment')
+
 module.exports = require('angular')
   .module('messages', [
     require('angular-sanitize'),
     require('./api')
   ])
-  .controller('MessagesController', MessagesController)
+  .controller('MessagesController', ['$scope', 'API', MessagesController])
   .directive('shortTimeAgo', shortTimeAgo)
   .directive('scrollToLast', scrollToLast)
   .filter('orderObjectBy', orderObjectBy)
@@ -16,13 +18,13 @@ function MessagesController ($scope, API) {
 
   $scope.open = function(matchId) {
     $scope.currentMatch = matchId
-    $scope.conversation = $scope.conversations[matchId];
+    $scope.conversation = $scope.conversations[matchId]
     API.userInfo($scope.conversations[matchId].userId).then(function (user) {
       $scope.user = user
       console.log(user)
       $scope.selectedPhoto = user.photos[0].url
     })
-  };
+  }
 
   $scope.logout = function() {
     API.logout()
@@ -41,33 +43,35 @@ function MessagesController ($scope, API) {
 
   $scope.lastMessageClass = function (match) {
     if (match.messages.length) {
-      var lastMessage = match.messages[match.messages.length - 1];
+      var lastMessage = match.messages[match.messages.length - 1]
       if (lastMessage.fromMe) {
         if (moment(match.userPingTime).isAfter(lastMessage.sentDate)) {
-          return 'last-me-pass';
+          return 'last-me-pass'
         } else {
-          return 'last-me-rest';
+          return 'last-me-rest'
         }
       } else {
-        return 'last-them';
+        return 'last-them'
       }
     }
-    return '';
-  };
+    return ''
+  }
 
-  $scope.keypress = function(event) {
+  $scope.keypress = function (event) {
     if (event.which == ENTER) {
-      event.preventDefault();
+      event.preventDefault()
       if ($scope.message.length > 0) {
-        API.sendMessage($scope.conversation.matchId, $scope.message);
+        API.sendMessage($scope.conversation.matchId, $scope.message)
+
         // Show pending message
-        $scope.conversation.pending = $scope.conversation.pending || [];
-        $scope.conversation.pending.push($scope.message);
+        $scope.conversation.pending = $scope.conversation.pending || []
+        $scope.conversation.pending.push($scope.message)
+
         // Reset
-        $scope.message = '';
+        $scope.message = ''
       }
     }
-  };
+  }
 }
 
 function orderObjectBy () {
@@ -128,12 +132,11 @@ function shortTimeAgo ($interval) {
 }
 
 function scrollToLast () {
-  return function(scope, element, attrs) {
+  return function (scope, element, attrs) {
     if(scope.$last) {
-      // console.log("Scrolling", scope);
-      setTimeout(function(){
-        angular.element(element)[0].scrollIntoView();
-      });
+      setTimeout(function () {
+        angular.element(element)[0].scrollIntoView()
+      })
     }
   }
 }

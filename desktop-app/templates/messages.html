@@ -10,11 +10,11 @@
       <div style="display:flex"></div>
     </div>
     <div class="menu" ng-class="{true: 'open'}[$showMenu]">
-      <div>
+<!--       <div>
         <button>Message Details</button>
-      </div>
+      </div> -->
       <div>
-        <button ng-click="logout()">Logout</button>
+        <button class="logout-bttn" ng-click="logout()">Logout</button>
       </div>
     </div>
     <div class="scrollable-matchlist">
@@ -23,17 +23,17 @@
            ng-class="{true: 'selected'}[currentMatch === match.matchId]"
            class="match">
         <img ng-src="{{match.thumbnail || 'img/anonymous.png'}}" class="thumbnail"/>
-        <div style="width:100%">
+        <div class="match-info">
           <div class="name">{{match.name || 'Unknown'}}</div>
           <div class="info">
             <div class="info-bit" ng-show="match.lastActive">
-              <i class="ion-ios-chatbubble-outline match-icon" ng-class="lastMessageClass(match)"></i> <span short-time-ago="{{match.lastActive}}"></span>
+              <i class="ion-ios-chatbubble-outline match-icon"></i> <span short-time-ago="{{match.lastActive}}"></span>
             </div>
             <div ng-show="match.userPingTime" class="info-bit">
               <i class="ion-ios-eye-outline match-icon"></i><span short-time-ago="{{match.userPingTime}}"></span>
             </div>
             <div class="info-bit" ng-show="match.userDistance">
-              <i class="ion-ios-location-outline match-icon"></i> {{match.userDistance + 'mi'}}
+              <i class="ion-ios-location-outline match-icon" style="font-size: 18px;"></i> {{match.userDistance + 'mi'}}
             </div>
           </div>
         </div>
