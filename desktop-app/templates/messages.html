@@ -81,16 +81,17 @@
     <textarea ng-keypress="keypress($event)" ng-model="message" rows="4" placeholder="Don't mess this up..."></textarea>
   </div>
   <profile class="profile-container" ng-if="user">
-    <img ng-src="{{selectedPhoto}}" class="profile-avatar" image-reveal>
-
-    <div class="photo-container">
-      <img ng-src="{{photo.url}}" 
-           class="small-img"
-           ng-repeat="photo in user.photos track by $index" 
-           ng-click="changePhoto($index)"
-           image-reveal
-           duration=".15s"
-           ng-classy="{true: 'selected'}[photo.url === selectedPhoto]">
+    <div class="profile-photo-container">
+      <img ng-src="{{selectedPhoto}}" class="profile-avatar" image-reveal style="display:flex">
+      <div class="photo-container">
+        <img ng-src="{{photo.url}}" 
+             class="small-img"
+             ng-repeat="photo in user.photos track by $index" 
+             ng-click="changePhoto($index)"
+             image-reveal
+             duration=".15s"
+             ng-classy="{true: 'selected'}[photo.url === selectedPhoto]">
+      </div>
     </div>
     
     <div style="margin:10px auto 4px">{{user.name}}</div>
