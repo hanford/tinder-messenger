@@ -1,4 +1,3 @@
-/* General styles */
 * {
   font-family: -apple-system, Helvetica, Arial, sans-serif;
   box-sizing: border-box;
@@ -16,8 +15,16 @@ a {
 /* General layout */
 html, body, body,
 html, body, body > div.ng-scope {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .y-scroll {
@@ -46,34 +53,6 @@ html, body, body > div.ng-scope {
 
 .last-seen.in {
   opacity: 1;
-}
-
-/* Specific */
-.title-bar {
-  width: 100%;
-  height: 25px;
-  background: #f8f8f8; /* Old browsers */
-  background: -moz-linear-gradient(top,  #f8f8f8 0%, #e3e3e3 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#e3e3e3)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #f8f8f8 0%,#e3e3e3 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #f8f8f8 0%,#e3e3e3 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #f8f8f8 0%,#e3e3e3 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #f8f8f8 0%,#e3e3e3 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e3e3e3',GradientType=0 ); /* IE6-9 */
-  z-index: 10001;
-  position: fixed;
-  -webkit-app-region: drag;
-  text-align: center;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  line-height: 25px;
-}
-
-.title-bar i {
-  float: right;
-  font-size: 18px;
-  padding: 3px 7px 0 0;
-  cursor: pointer;
 }
 
 .header {
@@ -199,7 +178,7 @@ html, body, body > div.ng-scope {
   align-items: center;
   padding: 0 8px;
   border-bottom: 1px solid #DDD;
-  justify-content: space-between;
+  justify-content: center;
   background: white;
   width: 100%;
 }
@@ -473,18 +452,23 @@ html, body, body > div.ng-scope {
 .settings-button {
   color: #db6151;
   background-color: transparent;
-  border: 0px;
+  border: 0;
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  font-size: 20px;
 }
 
 .unmatch-button {
-    background-color: white;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 3px;
-    background-color: #dd614c;
-    border: 0px;
-    cursor: pointer;
-    transition: all .2s linear;
+  background-color: white;
+  font-size: 16px;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background-color: #dd614c;
+  border: 0px;
+  cursor: pointer;
+  transition: all .2s linear;
 }
 
 .unmatch-button.hover {
@@ -615,7 +599,7 @@ profile.profile-container {
 .profile-avatar {
   border-radius: 2px;
   max-width: 160px;
-  margin-top: 70px;
+  max-height: 160px;
   box-shadow: 0 5px 5px rgba(85, 85, 85, 0.2);
   margin-bottom: 16px;
   border-radius: 50%;
@@ -629,4 +613,54 @@ profile.profile-container {
   border: 1px solid #DDD;
   border-radius: 3px;
   color: #ef5630;
+  font-size: 16px;
+}
+
+.profile-photo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #dd614c;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
 }

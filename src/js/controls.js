@@ -8,16 +8,14 @@ module.exports = require('angular')
   .service('Controls', Controls)
   .name
 
-function Controls (API, $interval, $q, orderByFilter, $timeout) {
+function Controls (API, $interval, $q, orderByFilter, $timeout, $rootScope) {
   var controls = {
-    'init': init
-  };
+    init: init
+  }
 
-  var infoQueue, pendingInfoRequests;
-
-  // Init / Decorate API
-
-  API.conversations = {};
+  var infoQueue
+  var pendingInfoRequests
+  API.conversations = {}
 
   // Decorate userInfo to update conversation after request
   API.userInfo = (function (API_userInfo) {
@@ -34,19 +32,19 @@ function Controls (API, $interval, $q, orderByFilter, $timeout) {
       });
 
       var promise = API_userInfo(userId);
-      promise.then(function(uId) {
-        updateMatchInfo(userIdToMatchId[userId])(uId);
-      }, function(err) {
+      promise.then(function (uId) {
+        updateMatchInfo(userIdToMatchId[userId])(uId)
+      }, function (err) {
         console.log('woah, user must be gone #botnet');
-        console.log(err);
+        console.log(err)
         if (err && err.status && err.status === 'not found') {
-          console.log('deleting convo');
-          delete API.conversations[userId];
+          console.log('deleting convo')
+          delete API.conversations[userId]
         }
-      });
-      return promise;
-    };
-  })(API.userInfo);
+      })
+      return promise
+    }
+  })(API.userInfo)
 
   // End - Init / Decorate API
 
@@ -55,8 +53,7 @@ function Controls (API, $interval, $q, orderByFilter, $timeout) {
   ///////////////////////////////
 
   function init () {
-
-    resetInfoQueue();
+    resetInfoQueue()
 
     // If loggedin sync from localStorage and start periodic updates
     if (localStorage.tinderToken) {
@@ -64,10 +61,10 @@ function Controls (API, $interval, $q, orderByFilter, $timeout) {
         API.conversations = JSON.parse(localStorage.conversations);
         API.setLastActivity(new Date(localStorage.lastActivity));
       } else {
-        API.getHistory().then(update);
+        API.getHistory().then(update)
       }
 
-      $interval(function() { API.getUpdates().then(update); }, 10000);
+      $interval(function() { API.getUpdates().then(update) }, 10000)
       API.getUpdates().then(update); // call right away for good measure
     }
   }
@@ -75,25 +72,25 @@ function Controls (API, $interval, $q, orderByFilter, $timeout) {
   function update (data) {
     if (data) {
       data.matches.forEach(function(match) {
-        if( (! API.conversations[match._id]) && (!(match.pending || match.dead)) ) {
+        if((!API.conversations[match._id]) && (!(match.pending || match.dead)) ) {
 
         // could add info from the match to add the name and possibly
         // even the photo from the match as the icon
-          var options = {
-            body: "Congratulations, you've got a new match on tinder-desktop!"
-           };
+          // var options = {
+          //   body: "Congratulations, you've got a new match on tinder-desktop!"
+          //  };
 
-          var notification = new Notification("New Match",options);
+          // var notification = new Notification("New Match",options);
 
-          notification.onclick = function () {
-            remote.getCurrentWindow().show();
-          }
+          // notification.onclick = function () {
+          //   remote.getCurrentWindow().show();
+          // }
 
-          notification.onshow = function () {
-            setTimeout(function() {notification.close();}, 5000);
-          }
+          // notification.onshow = function () {
+          //   setTimeout(function() {notification.close();}, 5000);
+          // }
 
-          createConversation(match);
+          createConversation(match)
           if (match.person) {
             var user = match.person
           }
@@ -103,11 +100,11 @@ function Controls (API, $interval, $q, orderByFilter, $timeout) {
       })
 
       data.blocks.forEach(function(blockedMatchId) {
-        delete API.conversations[blockedMatchId];
+        delete API.conversations[blockedMatchId]
       })
 
-      localStorage.conversations = JSON.stringify(API.conversations);
-      localStorage.lastActivity = API.getLastActivity().toISOString();
+      localStorage.conversations = JSON.stringify(API.conversations)
+      localStorage.lastActivity = API.getLastActivity().toISOString()
     } else {
       console.log('error: data is null')
     }
@@ -117,12 +114,12 @@ function Controls (API, $interval, $q, orderByFilter, $timeout) {
       return API.conversations[matchId];
     }), 'lastActive', true).forEach(function(conversation) {
       var matchId = conversation.matchId;
-      var updateTime = !conversation.infoUpdateTime || moment().isAfter(conversation.infoUpdateTime);
+      var updateTime = !conversation.infoUpdateTime || moment().isAfter(conversation.infoUpdateTime)
 
       if (updateTime && !pendingInfoRequests[matchId]) {
-        addMatchToInfoQueue(matchId);
+        addMatchToInfoQueue(matchId)
       }
-    });
+    })
   }
 
   function createConversation (match) {
@@ -205,8 +202,8 @@ function Controls (API, $interval, $q, orderByFilter, $timeout) {
     infoQueue = $q.when();
   }
 
-  function calcUserUpdateTimeISOString(user) {
-    var updateMinutes = user.distance_mi;
+  function calcUserUpdateTimeISOString (user) {
+    var updateMinutes = user.distance_mi
     if (updateMinutes < 5)
       updateMinutes = Math.ceil((Math.random() * 5));
     if (updateMinutes > 30)

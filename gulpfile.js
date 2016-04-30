@@ -18,12 +18,13 @@ var buildDir = './build';
 // File paths to various assets are defined here.
 var paths = {
   js: {
+    all: './src/**/**.js',
     output: './desktop-app/dist',
     input: './src/js/app.js'
   },
   css: {
-    in: './src/css/**.css',
-    out: './desktop-app/css/'
+    all: './src/css/**.css',
+    output: './desktop-app/dist',
   },
   imgs: {
     in: './src/img/**',
@@ -48,26 +49,29 @@ gulp.task('build-js', function (done) {
     .pipe(gulp.dest(paths.js.output))
 })
 
-gulp.task('watch', function () {
-  gulp.watch(paths.style.watch, ['build-css'])
+gulp.task('watch', ['build-js'], function () {
+  gulp.watch(paths.css.all, ['build-css'])
   gulp.watch(paths.js.all, ['build-js'])
 })
 
-// JavaScript assets handler
-//gulp.task('compile:scripts', function() {
-//  return gulp.src(paths.javascript)
-//    .pipe(gulp.dest('desktop-app/js/vendor'))
-//});
+gulp.task('build-css', function () {
+  var processors = [
+    require('autoprefixer')({browsers: ['last 2 versions']}),
+    require('postcss-import'),
+    require('postcss-nested'),
+    require('postcss-custom-properties'),
+    require('cssnext')
+  ]
 
-// Stylesheet assets handler
-gulp.task('compile:stylesheets', function () {
-  return gulp.src(paths.css.in)
-    .pipe(gulp.dest(paths.css.out))
+  return gulp.src(paths.css.all)
+    .pipe($.postcss(processors))
+    .pipe($.csso())
+    .pipe($.rename('main.css'))
+    .pipe(gulp.dest(paths.css.output))
 })
 
 // Assets handler
-gulp.task('compile:all', ['compile:stylesheets',
-          'move-images']);
+gulp.task('compile:all', ['move-images'])
 
 // Remove build output directories
 gulp.task('clean', function() {
@@ -194,7 +198,7 @@ gulp.task('pack:all', ['compile:all'], function (callback) {
 });
 
 // Run Tinder Desktop in debug mode
-gulp.task('run', ['compile:all', 'build-js'], function (callback) {
+gulp.task('run', ['compile:all', 'build-js', 'build-css', 'watch'], function (callback) {
   var child = proc.spawn(electron, ['--debug=5858', './desktop-app'])
 
   child.stdout.on('data', function(data) {

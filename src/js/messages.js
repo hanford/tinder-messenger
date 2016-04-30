@@ -3,7 +3,8 @@ var moment = require('moment')
 module.exports = require('angular')
   .module('messages', [
     require('angular-sanitize'),
-    require('./api')
+    require('./api'),
+    require('./controls')
   ])
   .controller('MessagesController', ['$scope', 'API', MessagesController])
   .directive('shortTimeAgo', shortTimeAgo)
@@ -12,9 +13,15 @@ module.exports = require('angular')
   .name
 
 function MessagesController ($scope, API) {
+  $scope.loading = true
   $scope.conversations = API.conversations
-  $scope.conversationCount = Object.keys($scope.conversations).length
-  var ENTER = 13
+
+  $scope.$watch('conversations', function (nv, ov) {
+    if (Object.keys(nv).length !== 0) {
+      $scope.loading = false
+      $scope.conversationCount = Object.keys(nv).length
+    }
+  }, true)
 
   $scope.open = function(matchId) {
     $scope.currentMatch = matchId
@@ -57,15 +64,15 @@ function MessagesController ($scope, API) {
     return ''
   }
 
-  $scope.keypress = function (event) {
-    if (event.which == ENTER) {
+  $scope.keypress = function (event, message) {
+    if (event.which == 13) {
       event.preventDefault()
-      if ($scope.message.length > 0) {
-        API.sendMessage($scope.conversation.matchId, $scope.message)
+      if (message.length > 0) {
+        API.sendMessage($scope.conversation.matchId, message)
 
-        // Show pending message
+        // Show pending $scope.message
         $scope.conversation.pending = $scope.conversation.pending || []
-        $scope.conversation.pending.push($scope.message)
+        $scope.conversation.pending.push(message)
 
         // Reset
         $scope.message = ''
@@ -106,23 +113,23 @@ function shortTimeAgo ($interval) {
     var stopTime, observeFn;
 
     function refreshTime() {
-      var minutes = moment().diff(scope.shortTimeAgo, 'minutes');
-      minutes = isNaN(minutes) ? 0 : minutes;
-      element.text(minutesToShortTime(minutes));
+      var minutes = moment().diff(scope.shortTimeAgo, 'minutes')
+      minutes = isNaN(minutes) ? 0 : minutes
+      element.text(minutesToShortTime(minutes))
     }
 
-    stopTime = $interval(refreshTime, 30000);
+    stopTime = $interval(refreshTime, 30000)
     observeFn = attrs.$observe('shortTimeAgo', refreshTime);
 
     element.on('$destroy', function() {
-      $interval.cancel(stopTime);
+      $interval.cancel(stopTime)
       observeFn();
     });
   }
 
   function minutesToShortTime (minutes) {
-    var hours = Math.floor(minutes / 60);
-    var days = Math.floor(minutes / 1440);
+    var hours = Math.floor(minutes / 60)
+    var days = Math.floor(minutes / 1440)
     if (minutes < 60)
       return minutes + 'm';
     else if (hours < 24)

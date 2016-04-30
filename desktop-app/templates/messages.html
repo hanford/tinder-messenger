@@ -1,18 +1,21 @@
-<div id="messages" class="columns">
+<div ng-if="loading" class="loader">
+  <div class="spinner">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
+</div>
+
+<div id="messages" class="columns" ng-if="!loading">
   <div id="match-list" ng-class="showExtra && 'more-info'">
     <div class="match-header">
       <button ng-click="$showMenu = !$showMenu" class="settings-button">
         <i class="ion-gear-a"></i>
       </button>
-      <div style="display:flex">
+      <div>
         Matches ({{conversationCount}})
       </div>
-      <div style="display:flex"></div>
     </div>
     <div class="menu" ng-class="{true: 'open'}[$showMenu]">
-<!--       <div>
-        <button>Message Details</button>
-      </div> -->
       <div>
         <button class="logout-bttn" ng-click="logout()">Logout</button>
       </div>
@@ -78,7 +81,7 @@
       <div ng-repeat-end class="clear" scroll-to-last></div>
 
     </div>
-    <textarea ng-keypress="keypress($event)" ng-model="message" rows="4" placeholder="Don't mess this up..."></textarea>
+    <textarea ng-keypress="keypress($event, message)" ng-model="message" rows="4" placeholder="Don't mess this up..."></textarea>
   </div>
   <profile class="profile-container" ng-if="user">
     <div class="profile-photo-container">
