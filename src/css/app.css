@@ -623,9 +623,17 @@ profile.profile-container {
   margin-top: 40px;
 }
 
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .spinner {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
 
   position: relative;
   margin: 100px auto;
@@ -652,15 +660,13 @@ profile.profile-container {
 
 @-webkit-keyframes sk-bounce {
   0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
+  50% { -webkit-transform: scale(2.0) }
 }
 
 @keyframes sk-bounce {
   0%, 100% { 
     transform: scale(0.0);
-    -webkit-transform: scale(0.0);
   } 50% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
+    transform: scale(2.0);
   }
 }
