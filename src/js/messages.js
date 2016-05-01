@@ -28,9 +28,21 @@ function MessagesController ($scope, API) {
     $scope.conversation = $scope.conversations[matchId]
     API.userInfo($scope.conversations[matchId].userId).then(function (user) {
       $scope.user = user
+      $scope.user.age = moment(user.birth_date).fromNow().replace('ago', 'old')
       console.log(user)
       $scope.selectedPhoto = user.photos[0].url
     })
+  }
+
+  $scope.formatDegree = function (degree) {
+    if (degree === 3) {
+      return '(3rd degree)'
+    } else if (degree === 2) {
+      return '(2nd degree)'
+    } else if (degree === 1) {
+      return '(1st degree)'
+    }
+
   }
 
   $scope.logout = function() {

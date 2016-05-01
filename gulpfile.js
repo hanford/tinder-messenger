@@ -59,13 +59,12 @@ gulp.task('build-css', function () {
     require('autoprefixer')({browsers: ['last 2 versions']}),
     require('postcss-import'),
     require('postcss-nested'),
-    require('postcss-custom-properties'),
-    require('cssnext')
+    require('postcss-custom-properties')
   ]
 
   return gulp.src(paths.css.all)
     .pipe($.postcss(processors))
-    .pipe($.csso())
+    // .pipe($.csso())
     .pipe($.rename('main.css'))
     .pipe(gulp.dest(paths.css.output))
 })
