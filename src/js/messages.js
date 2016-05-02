@@ -4,7 +4,7 @@ module.exports = require('angular')
   .module('messages', [
     require('angular-sanitize'),
     require('./api'),
-    require('./controls')
+    require('./controls'),
   ])
   .controller('MessagesController', ['$scope', 'API', MessagesController])
   .directive('shortTimeAgo', shortTimeAgo)
@@ -28,7 +28,10 @@ function MessagesController ($scope, API) {
     $scope.conversation = $scope.conversations[matchId]
     API.userInfo($scope.conversations[matchId].userId).then(function (user) {
       $scope.user = user
-      $scope.user.age = moment(user.birth_date).fromNow().replace('ago', 'old')
+      $scope.user.age = moment(user.birth_date)
+        .fromNow()
+        .replace('ago', 'old')
+
       console.log(user)
       $scope.selectedPhoto = user.photos[0].url
     })

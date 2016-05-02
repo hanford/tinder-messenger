@@ -210,12 +210,13 @@ button {
 }
 
 .match.selected {
-  background-color: #0069d9;
-  color: white;
-  border-color: #0069d9;
+  /*background-color: #0069d9;*/
+  /*color: white;*/
+  /*border-color: #0069d9;*/
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .match.selected > .match-info {
-  border-color: #0069d9;
+  border-color: rgba(0, 0, 0, 0.05);
 }
 
 .match .thumbnail {
@@ -272,13 +273,13 @@ button {
 
 /* from http://codepen.io/samuelkraft/pen/Farhl */
 #conversation {
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 1.1em;
-    line-height: 20px;
-    transition: all .2s linear;
-    font-weight: normal;
-    display: flex;
-    flex-direction: column;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 1.1em;
+  line-height: 20px;
+  transition: all .2s linear;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
 }
 #conversation div {
     flex: 1;
@@ -299,38 +300,35 @@ button {
 
 #conversation div.from-me,
 #conversation div.from-them {
-    max-width: 51%;
-    font-size: 14px;
-    word-wrap: break-word;
-    margin-bottom: 10px;
-    margin: 1px 0;
-    padding: 6px 12px;
+  max-width: 51%;
+  clear: both;
+  font-size: 14px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  margin: 1px 0;
+  padding: 6px 12px;
 }
 #conversation textarea {
-    font-size: 1em;
-    outline: none;
-    border: solid #ccc;
-    border-width: 1px 0 0 0;
-    border-radius: 0;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-      margin: 0;
-}
-
-.clear {
-    clear: both;
+  font-size: 1em;
+  outline: none;
+  border: solid #ccc;
+  border-width: 1px 0 0 0;
+  border-radius: 0;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .from-me {
-    cursor: pointer;
-    position: relative;
-    padding: 10px 15px;
-    color: white;
-    background: #0B93F6;
-    border-radius: 25px;
-    float: right;
-    z-index: 10;
+  cursor: pointer;
+  position: relative;
+  padding: 4px 8px;
+  color: white;
+  background: #20b3cc;
+  border-radius: 8px;
+  float: right;
+  z-index: 10;
 }
 .from-me:before {
     content: "";
@@ -339,45 +337,45 @@ button {
     bottom: -2px;
     right: -7px;
     height: 20px;
-    border-right: 20px solid #0B93F6;
-    border-bottom-left-radius: 16px 14px;
-    -webkit-transform: translate(0, -2px);
+    border-right: 20px solid #20b3cc;
+  border-bottom-left-radius: 16px 14px;
+  -webkit-transform: translate(0, -2px);
 }
 .from-me:after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    bottom: -2px;
-    right: -56px;
-    width: 26px;
-    height: 20px;
-    background: white;
-    border-bottom-left-radius: 10px;
-    -webkit-transform: translate(-30px, -2px);
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: -2px;
+  right: -56px;
+  width: 26px;
+  height: 20px;
+  background: white;
+  border-bottom-left-radius: 10px;
+  -webkit-transform: translate(-30px, -2px);
 }
 
 .sentAt {
-    position: absolute;
-    z-index: 9;
-    opacity: 0;
-    color: #555;
-    min-width: 150px;
+  position: absolute;
+  z-index: 9;
+  opacity: 0;
+  color: #555;
+  min-width: 150px;
 }
 
 .from-them-date {
-    right: -100px;
+  right: -100px;
 }
 
 .from-them-date.bounceIn {
-    transition: all .2s;
-    opacity: 1;
-    transform: translateX(55px);
+  transition: all .2s;
+  opacity: 1;
+  transform: translateX(55px);
 }
 
 .from-them-date.bounceOut {
-    transition: all .2s;
-    opacity: 0;
-    transform: translateX(-55px);
+  transition: all .2s;
+  opacity: 0;
+  transform: translateX(-55px);
 }
 
 .from-me-date {
@@ -385,58 +383,58 @@ button {
 }
 
 .from-me-date.bounceIn {
-    transition: all .2s;
-    opacity: 1;
-    transform: translateX(-55px);
+  transition: all .2s;
+  opacity: 1;
+  transform: translateX(-55px);
 }
 
 .from-me-date.bounceOut {
-    transition: all .2s;
-    opacity: 0;
-    transform: translateX(55px);
+  transition: all .2s;
+  opacity: 0;
+  transform: translateX(55px);
 }
 
 .from-them {
-    cursor: pointer;
-    position: relative;
-    z-index: 10;
-    padding: 10px 15px;
-    background: #E5E5EA;
-    border-radius: 25px;
-    color: black;
-    float: left;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  padding: 4px 8px;
+  background: #E5E5EA;
+  border-radius: 8px;
+  color: black;
+  float: left;
 }
 .from-them:before {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    bottom: -2px;
-    left: -7px;
-    height: 20px;
-    border-left: 20px solid #E5E5EA;
-    border-bottom-right-radius: 16px 14px;
-    -webkit-transform: translate(0, -2px);
+  content: "";
+  position: absolute;
+  z-index: 2;
+  bottom: -2px;
+  left: -7px;
+  height: 20px;
+  border-left: 20px solid #E5E5EA;
+  border-bottom-right-radius: 16px 14px;
+  -webkit-transform: translate(0, -2px);
 }
 .from-them:after {
-    content: "";
-    position: absolute;
-    z-index: 3;
-    bottom: -2px;
-    left: 4px;
-    width: 26px;
-    height: 20px;
-    background: white;
-    border-bottom-right-radius: 10px;
-    -webkit-transform: translate(-30px, -2px);
+  content: "";
+  position: absolute;
+  z-index: 3;
+  bottom: -2px;
+  left: 4px;
+  width: 26px;
+  height: 20px;
+  background: white;
+  border-bottom-right-radius: 10px;
+  -webkit-transform: translate(-30px, -2px);
 }
 
 .pending-message {
-    color: #DAE3EA;
+  color: #DAE3EA;
 }
 
 .scrollable-matchlist {
-    overflow: scroll;
-    max-height: 100%;
+  overflow: scroll;
+  max-height: 100%;
 }
 
 .settings-button {
@@ -450,23 +448,24 @@ button {
 }
 
 .unmatch-button {
-  background-color: #fff;
   padding: 6px 10px;
   border-radius: 3px;
-  color: #dd614c;
+  width: 100%;
+  color: white;
+  background-color: #dd614c;
   border: 0;
   cursor: pointer;
   transition: all .2s linear;
-  position: absolute;
-  right: 0;
-  top: 8px;
-  font-size: 26px;
-  transition: all .2s linear;
+  font-size: 16px;
   outline: none;
+  text-transform: uppercase;
+  height: 40px;
+  width: 95%;
+  font-family: 'Merriweather';
 }
 
 .unmatch-button.hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 ul.from-to {
@@ -575,9 +574,7 @@ profile.profile-container {
   cursor: pointer;
   max-width: 35px;
   margin: 0 4px;
-  border-radius: 50%;
-  border-radius: 2px;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
 }
 
 .small-img:hover {
@@ -590,7 +587,7 @@ profile.profile-container {
   max-height: 160px;
   box-shadow: 0 5px 5px rgba(85, 85, 85, 0.2);
   margin-bottom: 16px;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   transition: all .2s linear;
 }
 
@@ -705,11 +702,12 @@ divider {
   padding: 4px 8px;
   box-shadow: 0 0px 10px rgba(85, 85, 85, 0.15);
   width: 100%;
-  font-family: 14px;
+  font-size: 14px;
 
   .muted {
     opacity: 0.3;
     padding-right: 8px;
+    font-size: 14px;
   }
 
   .repeated-info {
@@ -745,7 +743,7 @@ divider {
     flex-direction: row;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin: 4px 0;
     width: 100%;
     word-wrap: break-word;
@@ -762,6 +760,8 @@ divider {
   }
 
   .connection-name {
-    font-size: 14px
+    font-size: 14px;
+    text-align: right;
+    margin: 0 4px;
   }
 }

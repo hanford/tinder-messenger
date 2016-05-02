@@ -93,15 +93,15 @@ function API ($q, $location) {
     return $q(function (resolve, reject) {
       client.getUser(userId, function(err, res, data) {
         if (!!err) {
-          handleError(err, reject);
-          return;
+          handleError(err, reject)
+          return
         }
         if (res === null) {
-          handleError('userInfo result is null', reject);
-          return;
+          handleError('userInfo result is null', reject)
+          return
         }
         // console.log(JSON.stringify(res));
-        resolve(res.results);
+        resolve(res.results)
       });
     });
   };
@@ -110,15 +110,15 @@ function API ($q, $location) {
     return $q(function (resolve, reject) {
       client.getAccount(function(err, res, data) {
         if (!!err) {
-          handleError(err, reject);
-          return;
+          handleError(err, reject)
+          return
         }
         if (res === null) {
-          handleError('userInfo result is null', reject);
-          return;
+          handleError('userInfo result is null', reject)
+          return
         }
 
-        resolve(res);
+        resolve(res)
       });
     });
   };
@@ -127,11 +127,11 @@ function API ($q, $location) {
     return $q(function (resolve, reject) {
       client.sendMessage(matchId, message, function(err, res, data) {
         if (!!err) {
-          handleError(err, reject);
-          return;
+          handleError(err, reject)
+          return
         }
         // console.log(JSON.stringify(res));
-        resolve(res);
+        resolve(res)
       });
     });
   };
@@ -140,11 +140,11 @@ function API ($q, $location) {
     return $q(function (resolve, reject) {
       client.unmatch(matchId, function(err, res, data) {
         if (!!err) {
-          handleError(err, reject);
-          return;
+          handleError(err, reject)
+          return
         }
-        console.log(JSON.stringify(res));
-        resolve(res);
+        console.log(JSON.stringify(res))
+        resolve(res)
       });
     });
   };
@@ -154,23 +154,21 @@ function API ($q, $location) {
     return $q(function (resolve, reject) {
       client.getUpdates(function(err, res, data) {
         if (!!err) {
-          handleError(err, reject);
-          return;
+          handleError(err, reject)
+          return
         }
-        // console.log(JSON.stringify(res));
-        resolve(res);
-      });
-    });
-  };
-
+        resolve(res)
+      })
+    })
+  }
 
   apiObj.getLastActivity = function () {
-    return client.lastActivity;
-  };
+    return client.lastActivity
+  }
 
   apiObj.setLastActivity = function(activityDate) {
-    client.lastActivity = activityDate;
-  };
+    client.lastActivity = activityDate
+  }
 
   return apiObj;
 }

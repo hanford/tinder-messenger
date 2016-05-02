@@ -7,7 +7,6 @@ require('angular')
     require('./controls')
   ])
     .config(function($routeProvider) {
-      //'/profile/:userId',
         $routeProvider.when('/login', {
           templateUrl: 'templates/login.html',
           controller: 'LoginController'
@@ -21,5 +20,5 @@ require('angular')
     })
     .run(function($location, Controls) {
       $location.path(localStorage.tinderToken ? '/messages' : '/login')
-      Controls.init();
+      Controls.init()
     })

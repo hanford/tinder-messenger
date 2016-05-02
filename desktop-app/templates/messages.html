@@ -34,17 +34,15 @@
               <i class="ion-ios-chatbubble-outline match-icon"></i> <span short-time-ago="{{match.lastActive}}"></span>
             </div>
             <div ng-show="match.userPingTime" class="info-bit">
-              <i class="ion-ios-eye-outline match-icon"></i><span short-time-ago="{{match.userPingTime}}"></span>
-            </div>
-            <div class="info-bit" ng-show="match.userDistance">
-              <i class="ion-ios-location-outline match-icon" style="font-size: 18px;"></i> {{match.userDistance + 'mi'}}
+              <div>Last active: &nbsp;</div>
+              <div><span short-time-ago="{{match.userPingTime}}"></span></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div id="conversation" ng-if="conversation">
+  <div id="conversation" ng-show="conversation">
     <div ng-show="conversation.messages.length == 0" class="messages-list-empty">
       No messages yet. Write something!
     </div>
@@ -64,24 +62,22 @@
         </div>
       </div>
 
-      <div ng-repeat-end class="clear" scroll-to-last></div>
+      <div ng-repeat-end scroll-to-last style="clear:both;"></div>
       <!-- pending messages -->
       <div ng-repeat-start="message in conversation.pending track by $index"
           class="from-me">
         <div class="pending-message">{{message}}</div>
       </div>
 
-      <div ng-repeat-end class="clear" scroll-to-last></div>
+      <div ng-repeat-end style="clear:both;" scroll-to-last></div>
 
     </div>
     <textarea ng-keypress="keypress($event, message)" ng-model="message" rows="4" placeholder="Don't mess this up..."></textarea>
   </div>
+
   <profile class="profile-container" ng-if="user">
     <div class="user-name">
       <div class="name">{{user.name}}</div>
-      <button ng-click="unmatch(conversation)" class="unmatch-button">
-        <i class="ion-close-circled"></i>
-      </button>
     </div>
     <div class="profile-photo-container">
       <img ng-src="{{selectedPhoto}}" class="profile-avatar" image-reveal style="display:flex">
@@ -96,8 +92,12 @@
       </div>
     </div>
 
-    <div class="section-title">About</div>
     <section class="info-section">
+      <div class="info">
+        <div class="muted">Location</div>
+        <div>{{user.distance_mi + ' miles away'}}</div>
+      </div>
+      <divider margin></divider>
       <div class="info">
         <div class="muted">Age</div>
         <div>{{user.age}}</div>
@@ -106,7 +106,7 @@
       <div ng-if="user.schools.length">
         <divider margin></divider>
         <div class="info">
-          <div class="muted"><i class="ion-university"></i></div>
+          <div class="muted">Edu</div>
           <div class="schooling repeated-info">
             <div ng-repeat="school in user.schools">
               <div>{{school.name}}</div>
@@ -115,13 +115,15 @@
         </div>
       </div>
 
+      <!-- {{user.common_likes}} -->
+
       <div ng-if="user.common_connections.length">
         <divider margin></divider>
         <div class="muted">Mutual Connections:</div>
         <div ng-repeat="con in user.common_connections" class="common-connection info">
           <div class="connection-info">
-            <img ng-src="{{con.photo.small}}">
             <div class="connection-name">{{con.name}} <br /> {{formatDegree(con.degree)}}</div>
+            <img ng-src="{{con.photo.small}}">
           </div>
         </div>
       </div>
@@ -152,10 +154,15 @@
     </section>
 
     <div ng-if="user.bio" style="width:100%;">
-      <div class="section-title" style="max-width:100%;margin-top:24px;">Bio</div>
+      <div class="section-title" style="max-width:100%;margin-top:24px;"></div>
       <div class="info info-section">
         <div style="white-space:pre-wrap;max-width:100%;">{{user.bio}}</div>
       </div>
     </div>
+    <br />
+    <!-- <divider margin></divider> -->
+    <button ng-click="unmatch(conversation)" class="unmatch-button">
+      Remove Match
+    </button>
   </profile>
 </div>
