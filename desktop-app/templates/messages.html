@@ -75,7 +75,7 @@
     <textarea ng-keypress="keypress($event, message)" ng-model="message" rows="4" placeholder="Don't mess this up..."></textarea>
   </div>
 
-  <profile class="profile-container" ng-if="user">
+  <profile class="profile-container" ng-show="user">
     <div class="user-name">
       <div class="name">{{user.name}}</div>
     </div>
@@ -103,7 +103,7 @@
         <div>{{user.age}}</div>
       </div>
 
-      <div ng-if="user.schools.length">
+      <div ng-show="user.schools.length">
         <divider margin></divider>
         <div class="info">
           <div class="muted">Edu</div>
@@ -117,7 +117,7 @@
 
       <!-- {{user.common_likes}} -->
 
-      <div ng-if="user.common_connections.length">
+      <div ng-show="user.common_connections.length">
         <divider margin></divider>
         <div class="muted">Mutual Connections:</div>
         <div ng-repeat="con in user.common_connections" class="common-connection info">
@@ -128,7 +128,7 @@
         </div>
       </div>
 
-      <div ng-if="user.common_interests.length">
+      <div ng-show="user.common_interests.length">
         <divider margin></divider>
         <div class="info">
           <div class="muted">Interests</div>
@@ -140,7 +140,7 @@
         </div>
       </div>
 
-      <div ng-if="user.jobs.length">
+      <div ng-show="user.jobs.length">
         <divider margin></divider>
         <div style="width:100%;">
           <div class="muted" style="float:left;">Job</div>
@@ -153,7 +153,7 @@
       </div>
     </section>
 
-    <div ng-if="user.bio" style="width:100%;">
+    <div ng-show="user.bio" style="width:100%;">
       <div class="section-title" style="max-width:100%;margin-top:24px;"></div>
       <div class="info info-section">
         <div style="white-space:pre-wrap;max-width:100%;">{{user.bio}}</div>
