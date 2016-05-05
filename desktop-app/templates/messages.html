@@ -164,5 +164,16 @@
     <button ng-click="unmatch(conversation)" class="unmatch-button">
       Remove Match
     </button>
+
+    <button ng-show="user.instagram" 
+            class="sidebar-button" 
+            ng-click="$showInsta = !$showInsta">
+          {{$showInsta === true ? 'Hide' : 'Show'}} Instagram
+    </button>
+    <div ng-if="user.instagram && $showInsta" class="instagram-gallery">
+      <div ng-repeat="photo in user.instagram.photos" class="instagram-photo-container">
+        <img src="{{photo.image}}" class="instagram-photo">
+      </div>
+    </div>
   </profile>
 </div>
