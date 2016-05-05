@@ -172,7 +172,7 @@
     </button>
     <div ng-if="user.instagram && $showInsta" class="instagram-gallery">
       <div ng-repeat="photo in user.instagram.photos" class="instagram-photo-container">
-        <img src="{{photo.image}}" class="instagram-photo">
+        <img src="{{photo.image}}" class="instagram-photo" image-reveal duration=".15s">
       </div>
     </div>
   </profile>
