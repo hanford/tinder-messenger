@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <div class="info-container">
+    <div class="info-container" ng-class="$showInsta && 'borderless'">
       <section class="info-section">
         <div class="info">
           <div class="muted">Location</div>
@@ -164,8 +164,10 @@
         </div>
       </div>
     </div>
-    <br />
-    <!-- <divider margin></divider> -->
+    <divider ng-hide="$showInsta"></divider>
+    <div ng-hide="$showInsta">
+      <br />
+    </div>
     <button ng-click="unmatch(conversation)" class="unmatch-button" ng-hide="$showInsta">
       Remove Match
     </button>

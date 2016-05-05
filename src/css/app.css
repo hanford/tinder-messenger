@@ -821,5 +821,10 @@ divider {
   overflow: scroll;
   background-color: white;
   flex-direction: column;
+  border-top: 1px solid #DDD;
   width: 100%;
+}
+
+.borderless {
+  border-top: 0px;
 }
