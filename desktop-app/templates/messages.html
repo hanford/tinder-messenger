@@ -92,76 +92,81 @@
       </div>
     </div>
 
-    <section class="info-section">
-      <div class="info">
-        <div class="muted">Location</div>
-        <div>{{user.distance_mi + ' miles away'}}</div>
-      </div>
-      <divider margin></divider>
-      <div class="info">
-        <div class="muted">Age</div>
-        <div>{{user.age}}</div>
-      </div>
-
-      <div ng-show="user.schools.length">
+    <div class="info-container">
+      <section class="info-section">
+        <div class="info">
+          <div class="muted">Location</div>
+          <div>{{user.distance_mi + ' miles away'}}</div>
+        </div>
         <divider margin></divider>
         <div class="info">
-          <div class="muted">Edu</div>
-          <div class="schooling repeated-info">
-            <div ng-repeat="school in user.schools">
-              <div>{{school.name}}</div>
+          <div class="muted">Age</div>
+          <div>{{user.age}}</div>
+        </div>
+
+        <div ng-show="user.schools.length">
+          <divider margin></divider>
+          <div class="info">
+            <div class="muted">Edu</div>
+            <div class="schooling repeated-info">
+              <div ng-repeat="school in user.schools">
+                <div>{{school.name}}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- {{user.common_likes}} -->
+        <!-- {{user.common_likes}} -->
 
-      <div ng-show="user.common_connections.length">
-        <divider margin></divider>
-        <div class="muted">Mutual Connections:</div>
-        <div ng-repeat="con in user.common_connections" class="common-connection info">
-          <div class="connection-info">
-            <img ng-src="{{con.photo.small}}">
-            <div class="connection-name">{{con.name}} <br /> {{formatDegree(con.degree)}}</div>
-          </div>
-        </div>
-      </div>
-
-      <div ng-show="user.common_interests.length">
-        <divider margin></divider>
-        <div class="info">
-          <div class="muted">Interests</div>
-          <div class="repeated-info">
-            <div ng-repeat="interest in user.common_interests">
-              <div>{{interest.name}}</div>
+        <div ng-show="user.common_connections.length">
+          <divider margin></divider>
+          <div class="muted">Mutual Connections:</div>
+          <div ng-repeat="con in user.common_connections" class="common-connection info">
+            <div class="connection-info">
+              <img ng-src="{{con.photo.small}}">
+              <div class="connection-name">{{con.name}} <br /> {{formatDegree(con.degree)}}</div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div ng-show="user.jobs.length">
-        <divider margin></divider>
-        <div style="width:100%;">
-          <div class="muted" style="float:left;">Job</div>
-          <div class="repeated-info">
-            <div ng-repeat="job in user.jobs">
-              <div>{{job.title.name}} {{job.company.name}}</div>
+        <div ng-show="user.common_interests.length">
+          <divider margin></divider>
+          <div class="info">
+            <div class="muted">Interests</div>
+            <div class="repeated-info">
+              <div ng-repeat="interest in user.common_interests">
+                <div>{{interest.name}}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <div ng-show="user.bio" style="width:100%;">
-      <div class="section-title" style="max-width:100%;margin-top:24px;"></div>
-      <div class="info info-section">
-        <div style="white-space:pre-wrap;max-width:100%;">{{user.bio}}</div>
+        <div ng-show="user.jobs.length">
+          <divider margin></divider>
+          <div style="width:100%;">
+            <div class="muted" style="float:left;">Job</div>
+            <div class="repeated-info">
+              <div ng-repeat="job in user.jobs">
+                <div>{{job.title.name}} {{job.company.name}}</div>
+              </div>
+            </div>
+          </div>
+          <divider margin></divider>
+          <div class="muted">Bio</div>
+          <div style="white-space:pre-wrap;max-width:100%;">{{user.bio}}</div>
+          <divider margin></divider>
+        </div>
+      </section>
+
+      <div ng-show="user.bio" style="width:100%;">
+        <div class="section-title" style="max-width:100%;margin-top:24px;"></div>
+        <div class="info info-section">
+        </div>
       </div>
     </div>
     <br />
     <!-- <divider margin></divider> -->
-    <button ng-click="unmatch(conversation)" class="unmatch-button">
+    <button ng-click="unmatch(conversation)" class="unmatch-button" ng-hide="$showInsta">
       Remove Match
     </button>
 
@@ -172,7 +177,7 @@
     </button>
     <div ng-if="user.instagram && $showInsta" class="instagram-gallery">
       <div ng-repeat="photo in user.instagram.photos" class="instagram-photo-container">
-        <img src="{{photo.image}}" class="instagram-photo" image-reveal duration=".15s">
+        <img src="{{photo.image}}" class="instagram-photo" image-reveal duration=".15s" ng-click="instagramSelect(photo.image)">
       </div>
     </div>
   </profile>

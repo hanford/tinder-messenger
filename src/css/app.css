@@ -487,6 +487,7 @@ button {
   flex-shrink: 0;
   font-family: 'Merriweather';
   margin-bottom: 16px;
+  transition: all .1s linear;
 }
 
 .unmatch-button.hover {
@@ -724,7 +725,7 @@ divider {
 
 .info-section {
   background-color: #fff;
-  box-shadow: 0 0px 10px rgba(85, 85, 85, 0.15);
+  /*box-shadow: 0 0px 10px rgba(85, 85, 85, 0.15);*/
   width: 100%;
   font-size: 14px;
   flex-shrink: 0;
@@ -799,6 +800,7 @@ divider {
 .instagram-photo {
   max-width: 100%;
   width: 90px;
+  cursor: pointer;
 }
 
 .instagram-gallery {
@@ -809,4 +811,15 @@ divider {
   flex-shrink: 0;
   width: 100%;
   justify-content: space-around;
+}
+
+.info-container {
+  height: 100%;
+  display: flex;
+  flex: 1;
+  max-width: 100%;
+  overflow: scroll;
+  background-color: white;
+  flex-direction: column;
+  width: 100%;
 }

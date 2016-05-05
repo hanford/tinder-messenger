@@ -45,7 +45,10 @@ function MessagesController ($scope, API) {
     } else if (degree === 1) {
       return '(1st degree)'
     }
+  }
 
+  $scope.instagramSelect = function (url) {
+    $scope.selectedPhoto = url
   }
 
   $scope.logout = function() {
