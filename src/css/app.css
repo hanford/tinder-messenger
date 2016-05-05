@@ -461,7 +461,9 @@ button {
   text-transform: uppercase;
   height: 40px;
   width: 95%;
+  flex-shrink: 0;
   font-family: 'Merriweather';
+  margin-bottom: 16px;
 }
 
 .unmatch-button.hover {
@@ -703,6 +705,7 @@ divider {
   box-shadow: 0 0px 10px rgba(85, 85, 85, 0.15);
   width: 100%;
   font-size: 14px;
+  flex-shrink: 0;
 
   .muted {
     opacity: 0.3;
@@ -743,7 +746,7 @@ divider {
     flex-direction: row;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin: 4px 0;
     width: 100%;
     word-wrap: break-word;
@@ -761,7 +764,6 @@ divider {
 
   .connection-name {
     font-size: 14px;
-    text-align: right;
     margin: 0 4px;
   }
 }

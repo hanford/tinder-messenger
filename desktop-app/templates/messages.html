@@ -122,8 +122,8 @@
         <div class="muted">Mutual Connections:</div>
         <div ng-repeat="con in user.common_connections" class="common-connection info">
           <div class="connection-info">
-            <div class="connection-name">{{con.name}} <br /> {{formatDegree(con.degree)}}</div>
             <img ng-src="{{con.photo.small}}">
+            <div class="connection-name">{{con.name}} <br /> {{formatDegree(con.degree)}}</div>
           </div>
         </div>
       </div>
