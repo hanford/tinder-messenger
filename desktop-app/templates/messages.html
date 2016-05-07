@@ -43,10 +43,10 @@
     </div>
   </div>
   <div id="conversation" ng-show="conversation">
-    <div ng-show="conversation.messages.length == 0" class="messages-list-empty">
-      No messages yet. Write something!
-    </div>
-    <div class="messages-list">
+    <div class="messages-list" ng-class="conversation.messages.length === 0 && 'center-no-message'">
+      <div ng-show="conversation.messages.length === 0">
+        No messages yet. Write something!
+      </div>
       <!-- normal messages -->
       <div ng-repeat-start="message in conversation.messages track by $index"
            ng-click="$showTimeStamp = !$showTimeStamp"
